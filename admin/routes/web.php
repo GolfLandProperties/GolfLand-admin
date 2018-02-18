@@ -14,3 +14,7 @@
 Route::get('/admin/golfAdmin/', function () {
     return view('welcome');
 });
+
+Route::get('/admin/GolfAdminHome/', function () {
+    return view('GolfAdminHome');
+});
