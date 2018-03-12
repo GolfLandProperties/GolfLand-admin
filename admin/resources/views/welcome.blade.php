@@ -116,15 +116,19 @@
     <body>
         <div class="login-page">
 		  <div class="form">
-			<form class="login-form">
-			  <input type="text" placeholder="username"/>
-			  <input type="password" placeholder="password"/>
+			<div class="login-form">
+			  <input type="text" placeholder="username" id="GL_uname" value="admin"/>
+			  <input type="password" placeholder="password" id="GL_pass" value="admin"/>
 			  <button id="GL-adminLogin">login</button>
-			</form>
+			  <br>
+			  <div style="display:none;" id="invalid">Invalid Username/Password</button>
+			</div>
 		  </div>
 		</div>
     </body>
 	<script src="../public/GolfLandAdmin/js/jquery/jquery.min.js"></script>
 	<script src="../public/GolfLandAdmin/js/define.js"></script>
 	<script src="../public/GolfLandAdmin/js/common.js"></script>
+	<script src="../public/GolfLandAdmin/js/server.js"></script>
+	<script src="../public/GolfLandAdmin/js/reports/login.js"></script>
 </html>

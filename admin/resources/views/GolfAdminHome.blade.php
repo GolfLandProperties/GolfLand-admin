@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>GolfLand - Admin Dashboard</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../public/GolfLandAdmin/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">GolfLand Properties</a>
+                <a class="navbar-brand" href="golfAdmin">GolfLand Properties</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -52,12 +52,10 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <!-- <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li> -->
+                        <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li> -->
+                        <!-- <li class="divider"></li> -->
+                        <li><a href="golfAdmin"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -70,7 +68,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidemenu active">
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw sidemenu active"></i> Dashboard</a>
+                            <a href="GolfAdminHome"><i class="fa fa-dashboard fa-fw sidemenu active"></i> Dashboard</a>
                         </li>	
                     </ul>
                 </div>
@@ -82,14 +80,36 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Add Properties</h1>
+					<div class="panel panel-default">
+                        <div class="panel-heading">
+                            Add Properties
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active add_form_tab" data-tabtype="residential"><a href="#residentials" data-toggle="tab">Residentials</a></li>
+                                <li class="add_form_tab" data-tabtype="comersial"><a href="#commercial" data-toggle="tab">Commercial</a></li>
+                                <li class="add_form_tab" data-tabtype="warehouse"><a href="#warehouse" data-toggle="tab">Warehouses</a></li>
+                                <li class="add_form_tab" data-tabtype="running"><a href="#runningoffice" data-toggle="tab">Running Office</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="residentials">
+                                    <div class="col-lg-12" id="add_res_property_form"></div>
+                                </div>
+                                <div class="tab-pane fade in" id="commercial">
+                                    <div class="col-lg-12" id="add_comm_property_form">Commersials Appartment Add Form.. <br>Commins Soon..</div>
+                                </div>
+                                <div class="tab-pane fade in" id="warehouse">
+                                    <div class="col-lg-12" id="add_ware_property_form">Warehouse Add Fome.. <br>Commins Soon..</div>
+                                </div>
+                                <div class="tab-pane fade in" id="runningoffice">
+                                    <div class="col-lg-12" id="add_run_property_form">Running Office Add Form.. <br>Commins Soon..</div>
+                                </div>
+                           </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-			<div class="row">
-                <div class="col-lg-12">
-                </div>
-			</div>
             <!-- /.row -->
             <!--<div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -189,7 +209,8 @@
 
     <!-- jQuery -->
     <script src="../public/GolfLandAdmin/js/jquery/jquery.min.js"></script>
-
+	<script src="../public/GolfLandAdmin/js/jquery.toaster.js"></script>
+	<script src="../public/GolfLandAdmin/js/dropzone.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="../public/GolfLandAdmin/js/bootstrap/js/bootstrap.min.js"></script>
 
@@ -199,11 +220,32 @@
     <!-- Morris Charts JavaScript -->
     <script src="../public/GolfLandAdmin/js/raphael/raphael.min.js"></script>
     <script src="../public/GolfLandAdmin/js/morrisjs/morris.min.js"></script>
-    <script src="../data/morris-data.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
-
+	
+	<script src="../public/GolfLandAdmin/js/define.js"></script>
+	<script src="../public/GolfLandAdmin/js/common.js"></script>
+	<script src="../public/GolfLandAdmin/js/server.js"></script>
+	<script src="../public/GolfLandAdmin/js/utils.js"></script>
+	<script src="../public/GolfLandAdmin/js/reports/home.js"></script>
+	<script src="../public/GolfLandAdmin/js/reports/recidentials.js"></script>
+	<script src="../public/GolfLandAdmin/js/reports/commercial.js"></script>
+	<script>
+		function initMap() {
+			var input = document.getElementById("google_city");
+			var options = {lat:23.424076,lng:53.847818};
+			var options = {
+					  bounds: [{lat:23.424076,lng:53.847818}],
+					  types: ['geocode']
+					};
+			var autocomplete = new google.maps.places.Autocomplete(input);
+			autocomplete.addListener('place_changed', function() {
+				var place = autocomplete.getPlace();
+				$("#latt").val(place.geometry.location.lat());
+				$("#long").val(place.geometry.location.lng());
+			})
+		}
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-8RDmgpFYHBKnwvvhSxs6-7qOF_VF5TA&libraries=places&callback=initMap" async defer></script>
+	
 </body>
 
 </html>
